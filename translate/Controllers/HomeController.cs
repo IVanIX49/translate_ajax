@@ -35,13 +35,13 @@ namespace translate.Controllers
         */
 
         [HttpPost]
-        public async Task<IActionResult> ProcessData([FromBody] DataModel data)
+        public async Task<JsonResult> SendText(string text, string from_lan, string to_lan)
         {
 
-            Task<string> task = PostResponse(data.text, data.from_lan, data.to_lan);
+            Task<string> task = PostResponse(text, from_lan, to_lan);
             string result = await task;
-            ViewBag.Content = result;
-            return Content(result, "Test/cshtml");
+            
+            return Json(result);
         }
 
 
@@ -53,11 +53,11 @@ namespace translate.Controllers
             return RedirectToAction("Test", new { content , from_lan, to_lan });
         }
 
-        public async Task<IActionResult> Test(string text = null, string from_lan = null, string to_lan = null)
+        public async Task<IActionResult> Test()
         {
-            Task<string> task = PostResponse(text, from_lan, to_lan);
-            string result = await task;
-            ViewBag.Content = result;
+            //Task<string> task = PostResponse(text, from_lan, to_lan);
+            //string result = await task;
+            //ViewBag.Content = result;
 
 
             return View();

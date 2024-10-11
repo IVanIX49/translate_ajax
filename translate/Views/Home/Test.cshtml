@@ -13,7 +13,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Переводчик</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <title>Оффлайн - переводчик</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,58 +80,65 @@
 </head>
 <body>
 
-  <script src="https://ajax.OpenAIapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script>
-    $(document).ready(function() {
-            $("#translate_form").submit(function (event) {
-        event.preventDefault();
-
-        var text = $("#text").val();
-        var from_lan = $("#from_lan").val();
-        var to_lan = $("#to_lan").val();
-
-        $.ajax({
-          type: "POST",
-                    url: "/Home/ProcessData",
-          data: JSON.stringify({ name: name , from_lan : from_lan, to_lan:to_lan
-          contentType: "application/json; charset=utf-8", 
-          success: function(response) {
-            $("#result").html(response);
-          }
-        });
-      });
-    });
-  </script>
    
     <div class="container">
-        <h1>Переводчик</h1>
-        <form asp-controller="Home" asp-action="Submit" method="post" id="translate_form">
+        <h1>Оффлайн - переводчик, работающий в сети училища </h1>
+      
 
             <div class="language-select">
                 <select name="from_lan" id="from_lan">
                     <option value="ru">Русский</option>
                     <option value="en">Английский</option>
+                    <option value="fr">Французский</option>
                     <!-- Добавьте больше языков по необходимости -->
                 </select>
 
                 <select name="to_lan" id="to_lan">
                     <option value="en">Английский</option>
                     <option value="ru">Русский</option>
+                    <option value="fr">Французский</option>
                     <!-- Добавьте больше языков по необходимости -->
                 </select>
             </div>
 
             <textarea id="text" name="text" placeholder="Введите текст..."></textarea>
 
-            <button>Перевести</button>
+            <button id="ajaxButton">Перевести</button>
 
-        </form>
+        
         
 
-        <textarea placeholder="Результат перевода..." readonly >@ViewBag.Content</textarea>
         
-
+        <textarea id="result" readonly></textarea>
 
     </div>
+
+    <script>
+    $(document).ready(function () {
+        $('#ajaxButton').click(function () {
+            var btn_text = $('#text').val();
+            var btn_from_lan = $('#from_lan').val();
+            var btn_to_lan = $('#to_lan').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SendText", "Home")',
+                data: {
+                    text: btn_text,
+                    from_lan: btn_from_lan,
+                    to_lan : btn_to_lan
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#result').html(data);
+                },
+                error: function (xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            });
+        });
+    });
+    </script>
+
 </body>
 </html>
