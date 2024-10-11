@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Главная страница";
+}
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой проект</title>
+    <link rel="stylesheet" href="\bootstrap-5.3.3\dist\css\bootstrap.min.css">
+</head>
+<body>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+    <h2>Введите ваше имя</h2>
+    <form asp-controller="Home" asp-action="Submit" method="post">
+        <input type="text" name="name" required />
+        <button type="submit">Отправить</button>
+    </form>
+    @if (!string.IsNullOrEmpty(ViewBag.Name))
+    {
+        <h3>Вы ввели имя: @ViewBag.Name</h3>
+    }
+
+</body>
+</html>
+

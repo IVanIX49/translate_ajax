@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "QqkciafB2Zw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\AV\\source\\repos\\translate\\translate\\translate.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AV\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
