@@ -49,7 +49,7 @@ namespace translate.Controllers
         [HttpPost]
         public IActionResult Submit(string content,string from_lan, string to_lan)
         {
-            // Перенаправляем обратно на страницу с переданным именем
+            // ГЏГҐГ°ГҐГ­Г ГЇГ°Г ГўГ«ГїГҐГ¬ Г®ГЎГ°Г ГІГ­Г® Г­Г  Г±ГІГ°Г Г­ГЁГ¶Гі Г± ГЇГҐГ°ГҐГ¤Г Г­Г­Г»Г¬ ГЁГ¬ГҐГ­ГҐГ¬
             return RedirectToAction("Test", new { content , from_lan, to_lan });
         }
 
@@ -79,7 +79,7 @@ namespace translate.Controllers
             {   
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync("http://localhost:5000/api/translate", content);
+                var response = await client.PostAsync("http://localhost:80/api/translate", content);
                 
 
                 if (response.IsSuccessStatusCode)
@@ -87,14 +87,14 @@ namespace translate.Controllers
                     string responseBody = await response.Content.ReadAsStringAsync();
                     dynamic data_text = JsonConvert.DeserializeObject(responseBody);
                     var context_text = data_text.translated_text;
-                    await Task.Delay(1000); // Имитация задержки в 1 секунду
+                    await Task.Delay(1000); // Г€Г¬ГЁГІГ Г¶ГЁГї Г§Г Г¤ГҐГ°Г¦ГЄГЁ Гў 1 Г±ГҐГЄГіГ­Г¤Гі
                     return context_text;
                 }
                 else
                 {
-                    Console.WriteLine("Ошибка: " + response.StatusCode);
-                    await Task.Delay(1000); // Имитация задержки в 1 секунду
-                    return "Ожидание...";
+                    Console.WriteLine("ГЋГёГЁГЎГЄГ : " + response.StatusCode);
+                    await Task.Delay(1000); // Г€Г¬ГЁГІГ Г¶ГЁГї Г§Г Г¤ГҐГ°Г¦ГЄГЁ Гў 1 Г±ГҐГЄГіГ­Г¤Гі
+                    return "ГЋГ¦ГЁГ¤Г Г­ГЁГҐ...";
                 }
                 
             }
