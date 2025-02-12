@@ -1,0 +1,1 @@
+Translator based on ai
