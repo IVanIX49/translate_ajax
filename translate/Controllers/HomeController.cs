@@ -79,7 +79,7 @@ namespace translate.Controllers
             {   
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync("http://31.31.207.6:80/api/translate", content);
+                var response = await client.PostAsync("http://localhost:5000/api/translate", content);
                 
 
                 if (response.IsSuccessStatusCode)
